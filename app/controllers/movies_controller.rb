@@ -11,9 +11,9 @@ class MoviesController < ApplicationController
   end
 
   def index
-    #@movies = Movie.all
-    @sort = params[:sort]
-    @movie = Movie.all.order(@sort)
+    @movies = Movie.all
+    #@sort = params[:sort]
+    #@movie = Movie.all.order(@sort)
 
   end
 
