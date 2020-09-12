@@ -16,6 +16,8 @@ class MoviesController < ApplicationController
     @sort = params[:sort]
     @movies = Movie.all.order(@sort)
     
+    
+    #---------------------decide which item should be yellow back ground
     if params[:sort] == "title" then
       @title_header = "hilite"
     else
@@ -27,8 +29,11 @@ class MoviesController < ApplicationController
     else
       @release_date_header = ""
     end
+    #---------------------decide which item should be yellow back ground
+    
+    
   end
-
+  
   def new
     # default: render 'new' template
   end
