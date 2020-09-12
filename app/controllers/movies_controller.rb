@@ -15,7 +15,7 @@ class MoviesController < ApplicationController
     
     @sort = params[:sort]
     @movies = Movie.all.order(@sort)
-    
+    @all_ratings = Movie.all_ratings
     
     #---------------------decide which item should be yellow back ground
     if params[:sort] == "title" then
