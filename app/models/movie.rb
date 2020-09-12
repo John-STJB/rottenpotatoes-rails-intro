@@ -4,7 +4,7 @@ class Movie < ActiveRecord::Base
     # => [[1, 'David'], [2, 'Jeremy'], [3, 'Jose']]
     def self.all_ratings
         
-        Movie.pluck(:rating).uniq
+        self.pluck(:rating).uniq
         
     end
 end
