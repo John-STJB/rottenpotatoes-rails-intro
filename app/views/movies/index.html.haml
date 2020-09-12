@@ -1,10 +1,18 @@
 -#  This file is app/views/movies/index.html.haml
 %h2 All Movies
 
+
+
 %table#movies.table.table-striped.col-md-12
   %thead
     %tr
-      %th Movie Title
+      -#%th Movie Title
+      
+      -if @sort_target == "title"
+        %th.hilite= link_to "Movie Title", movies_path(:sort_by=>'title', :ratings=>@ratings), :id=>"title_header"
+      -else
+        %th= link_to "Movie Title", movies_path(:sort_by=>'title', :ratings=>@ratings), :id=>"title_header"
+      
       %th Rating
       %th Release Date
       %th More Info
