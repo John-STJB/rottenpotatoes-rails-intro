@@ -23,9 +23,9 @@ class MoviesController < ApplicationController
     end
     
     if params[:sort] == "release_date" then
-      @title_header = "hilite"
+      @release_date_header = "hilite"
     else
-      @title_header = ""
+      @release_date_header = ""
     end
   end
 
