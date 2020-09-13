@@ -15,7 +15,11 @@ class MoviesController < ApplicationController
     @all_ratings = Movie.all_ratings
     @sort = params[:sort]
     #@movies = Movie.all.order(@sort)
-    params[:ratings].nil? ? t_param = all_ratings : t_param = params[:ratings].keys
+    if params[:ratings] == nil
+      t_param = @all_ratings
+    else
+      t_param = params[:ratings].keys
+    end
     @movies = Movie.where(rating: t_param).order(@sort)
     
     
