@@ -12,10 +12,12 @@ class MoviesController < ApplicationController
 
   def index
     #@movies = Movie.all
-    
-    @sort = params[:sort]
-    @movies = Movie.all.order(@sort)
     @all_ratings = Movie.all_ratings
+    @sort = params[:sort]
+    #@movies = Movie.all.order(@sort)
+    params[:ratings].nil? ? t_param = all_ratings : t_param = params[:ratings].keys
+    @movies = Movie.where(rating: t_param).order(@sort)
+    
     
     #---------------------decide which item should be yellow back ground
     if params[:sort] == "title" then
