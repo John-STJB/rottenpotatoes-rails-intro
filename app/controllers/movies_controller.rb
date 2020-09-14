@@ -47,7 +47,7 @@ class MoviesController < ApplicationController
       end
     end
     
-    #Finally, give @movies
+    #Finally, give @ratings and @sort to  @movies
     @movies = Movie.where(:rating => @ratings.keys).order(@sort)
     
     

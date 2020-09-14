@@ -8,7 +8,7 @@
     = rating
     -#= check_box_tag "ratings[#{rating}]"
    
-    -# checked check box 
+    -# if check box checked or not
     = check_box_tag "ratings[#{rating}]", value = "1", checked= (true if @ratings[rating])
   = submit_tag 'Refresh'
 -# Creat check box and Refresh Button End
