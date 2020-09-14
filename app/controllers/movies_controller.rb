@@ -43,17 +43,13 @@ class MoviesController < ApplicationController
         @ratings[rating] = 1
       end
     end
-
-    if @sort #and @ratings
-      @movies = Movie.where(:rating => @ratings.keys).order(@sort)
-    #elsif @ratings
-    else
-      @movies = Movie.where(:rating => @ratings.keys)
-    #elsif @sort
-    #  @movies = Movie.all.order(@sort)
+    
+    @movies = Movie.where(:rating => @ratings.keys).order(@sort)
+    #if @sort
+    #  @movies = Movie.where(:rating => @ratings.keys).order(@sort)
     #else
-    #  @movies = Movie.all
-    end
+    #  @movies = Movie.where(:rating => @ratings.keys)
+    #end
     
     
     #---------------------decide which item should be yellow back ground
