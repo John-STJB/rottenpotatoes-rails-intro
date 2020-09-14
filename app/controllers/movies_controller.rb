@@ -13,14 +13,46 @@ class MoviesController < ApplicationController
   def index
     #@movies = Movie.all
     @all_ratings = Movie.all_ratings
-    @sort = params[:sort]
+    #@sort = params[:sort]
     #@movies = Movie.all.order(@sort)
-    if params[:ratings] == nil
-      t_param = @all_ratings
-    else
-      t_param = params[:ratings].keys
+    #if params[:ratings] == nil
+    #  t_param = @all_ratings
+    #else
+    #  t_param = params[:ratings].keys
+    #end
+    #@movies = Movie.where(rating: t_param).order(@sort)
+    
+    @all_ratings = Movie.all_ratings
+    
+    if params[:sort] or params[:ratings]
+      @sort = params[:sort]
+      session[:sort] = @sort
+      @ratings = params[:ratings]
+      session[:ratings] = @ratings
+
+    elsif session[:sort] or session[:ratings]
+      @sort = session[:sort]
+      @ratings = session[:ratings]
+      flash.keep
+      redirect_to movies_path :sort => @sort, :ratings => @ratings
     end
-    @movies = Movie.where(rating: t_param).order(@sort)
+
+    if @ratings == nil
+      @ratings = Hash.new
+      @all_ratings.each do |rating|
+        @ratings[rating] = 1
+      end
+    end
+
+    if @sort and @ratings
+      @movies = Movie.where(:rating => @ratings.keys).order(@sort)
+    elsif @ratings
+      @movies = Movie.where(:rating => @ratings.keys)
+    elsif @sort
+      @movies = Movie.all.order(@sort)
+    else
+      @movies = Movie.all
+    end
     
     
     #---------------------decide which item should be yellow back ground
