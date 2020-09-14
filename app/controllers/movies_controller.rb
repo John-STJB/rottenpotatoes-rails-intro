@@ -34,12 +34,12 @@ class MoviesController < ApplicationController
       end
     end
     
-    @movies = Movie.where(:rating => @ratings.keys).order(@sort)
-    #if @sort
-    #  @movies = Movie.where(:rating => @ratings.keys).order(@sort)
-    #else
-    #  @movies = Movie.where(:rating => @ratings.keys)
-    #end
+    #@movies = Movie.where(:rating => @ratings.keys).order(@sort)
+    if @sort
+      @movies = Movie.where(:rating => @ratings.keys).order(@sort)
+    else
+      @movies = Movie.where(:rating => @ratings.keys)
+    end
     
     
     #---------------------decide which item should be yellow back ground
