@@ -11,17 +11,7 @@ class MoviesController < ApplicationController
   end
 
   def index
-    #@movies = Movie.all
-    #@all_ratings = Movie.all_ratings
-    #@sort = params[:sort]
-    #@movies = Movie.all.order(@sort)
-    #if params[:ratings] == nil
-    #  t_param = @all_ratings
-    #else
-    #  t_param = params[:ratings].keys
-    #end
-    #@movies = Movie.where(rating: t_param).order(@sort)
-    
+  
     @all_ratings = Movie.all_ratings
     
     if params[:sort] or params[:ratings]
