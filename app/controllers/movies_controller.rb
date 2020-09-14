@@ -14,19 +14,32 @@ class MoviesController < ApplicationController
   
     @all_ratings = Movie.all_ratings
     
-    if params[:sort] or params[:ratings]
-      @sort = params[:sort]
-      session[:sort] = @sort
-      @ratings = params[:ratings]
-      session[:ratings] = @ratings
-
-    elsif session[:sort] or session[:ratings]
-      @sort = session[:sort]
-      @ratings = session[:ratings]
+    
+    # I would like to have the info from @ratings and @sort and then pass to @movies
+    # first, I need to check if there is new update for them
+    
+    new_sort = params[:sort]
+    new_ratings = params[:ratings]
+    
+    mem_sort = session[:sort]
+    mem_ratings = session[:ratings]
+    
+    # if new exisit sth, means table should be renewed
+    if new_sort or new_ratings
+      @sort = new_sort
+      @ratings = new_ratings
+      session[:sort] = new_sort
+      session[:ratings] = new_ratings
+    
+    # if no new, but mem, remain mem :sort and :ratings
+    elsif mem_sort or mem_ratings
+      @sort = mem_sort
+      @ratings = mem_ratings
       flash.keep
-      redirect_to movies_path :sort => @sort, :ratings => @ratings
+      redirect_to movies_path(:sort => @sort, :ratings => @ratings)
     end
-
+    
+    # I don't want @ratings be null, I would like to checked all check box if user check nothing
     if @ratings == nil
       @ratings = Hash.new
       @all_ratings.each do |rating|
@@ -34,7 +47,7 @@ class MoviesController < ApplicationController
       end
     end
     
-    #13
+    #Finally, give @movies
     @movies = Movie.where(:rating => @ratings.keys).order(@sort)
     
     
