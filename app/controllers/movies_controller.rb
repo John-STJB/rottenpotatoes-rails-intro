@@ -34,6 +34,7 @@ class MoviesController < ApplicationController
       end
     end
     
+    #To test
     #@movies = Movie.where(:rating => @ratings.keys).order(@sort)
     if @sort
       @movies = Movie.where(:rating => @ratings.keys).order(@sort)
@@ -48,6 +49,7 @@ class MoviesController < ApplicationController
     else
       @title_header = ""
     end
+    
     
     if params[:sort] == "release_date" then
       @release_date_header = "hilite"
