@@ -12,7 +12,7 @@ class MoviesController < ApplicationController
 
   def index
     #@movies = Movie.all
-    @all_ratings = Movie.all_ratings
+    #@all_ratings = Movie.all_ratings
     #@sort = params[:sort]
     #@movies = Movie.all.order(@sort)
     #if params[:ratings] == nil
@@ -44,14 +44,15 @@ class MoviesController < ApplicationController
       end
     end
 
-    if @sort and @ratings
+    if @sort #and @ratings
       @movies = Movie.where(:rating => @ratings.keys).order(@sort)
-    elsif @ratings
-      @movies = Movie.where(:rating => @ratings.keys)
-    elsif @sort
-      @movies = Movie.all.order(@sort)
+    #elsif @ratings
     else
-      @movies = Movie.all
+      @movies = Movie.where(:rating => @ratings.keys)
+    #elsif @sort
+    #  @movies = Movie.all.order(@sort)
+    #else
+    #  @movies = Movie.all
     end
     
     
